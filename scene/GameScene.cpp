@@ -74,7 +74,6 @@ void GameScene::Draw() {
 	// 3Dオブジェクト描画後処理
 	Model::PostDraw();
 
-	PrimitiveDrawer::GetInstance()->DrawLine3d(lineStart,lineEnd,lineColor);
 #pragma endregion
 
 #pragma region 前景スプライト描画

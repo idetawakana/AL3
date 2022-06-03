@@ -58,12 +58,6 @@ private: // メンバ変数
 
 	DebugCamera* debugCamera_ = nullptr;
 
-	Vector3 lineStart = { 0,0,0 };
-
-	Vector3 lineEnd = { 10,0,0 };
-
-	Vector4 lineColor = { 255,255,255,1 };
-
 	/// <summary>
 	/// ゲームシーン用
 	/// </summary>
