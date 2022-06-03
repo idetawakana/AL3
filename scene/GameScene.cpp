@@ -2,7 +2,6 @@
 #include "TextureManager.h"
 #include <cassert>
 #include "AxisIndicator.h"
-#include "PrimitiveDrawer.h"
 
 GameScene::GameScene() {}
 
@@ -29,13 +28,6 @@ void GameScene::Initialize() {
 
 	//軸方向表示の表示を有効にする
 	AxisIndicator::GetInstance()->SetVisible(true);
-	//軸方向表示が参照するビュープロダクションを指定する(アドレス渡し)
-	AxisIndicator::GetInstance()->SetTargetViewProjection(&debugCamera_->GetViewProjection());
-	
-	//ライン描画が参照するビュープロダクションを指定する
-	PrimitiveDrawer::GetInstance()->SetViewProjection(&debugCamera_->GetViewProjection());
-	
-
 }
 
 void GameScene::Update() {
