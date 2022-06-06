@@ -2,6 +2,7 @@
 #include "TextureManager.h"
 #include <cassert>
 #include "AxisIndicator.h"
+#include "Utility.h"
 
 GameScene::GameScene() {}
 
@@ -47,8 +48,112 @@ void GameScene::Initialize() {
 
 	worldtransform_.matWorld_ *= matScale;
 
+	//x,y,z軸周りの回転角を設定
+	worldtransform_.rotation_ = { 0.0f,0.0f,radian(45.0f)};
+
+	//z軸回転行列を宣言
+	Matrix4 matRotZ;
+
+	matRotZ.m[0][0] = cos(radian(45.0f));
+	matRotZ.m[0][1] = sin(radian(45.0f));
+	matRotZ.m[1][0] = -sin(radian(45.0f));
+	matRotZ.m[1][1] = cos(radian(45.0f));
+	matRotZ.m[2][2] = 1;
+	matRotZ.m[3][3] = 1;
+
+	worldtransform_.matWorld_.m[0][0] = 1;
+	worldtransform_.matWorld_.m[1][1] = 1;
+	worldtransform_.matWorld_.m[2][2] = 1;
+	worldtransform_.matWorld_.m[3][3] = 1;
+
+	worldtransform_.matWorld_ *= matRotZ;
+
+	//x,y,z軸周りの回転角を設定
+	worldtransform_.rotation_ = { radian(45.0f),0.0f,0.0f };
+
+	//x軸回転行列を宣言
+	Matrix4 matRotX;
+
+	matRotX.m[0][0] = 1;
+	matRotX.m[1][1] = cos(radian(45.0f));
+	matRotX.m[1][2] = sin(radian(45.0f));
+	matRotX.m[2][1] = -sin(radian(45.0f));
+	matRotX.m[2][2] = cos(radian(45.0f));
+	matRotX.m[3][3] = 1;
+
+	worldtransform_.matWorld_.m[0][0] = 1;
+	worldtransform_.matWorld_.m[1][1] = 1;
+	worldtransform_.matWorld_.m[2][2] = 1;
+	worldtransform_.matWorld_.m[3][3] = 1;
+
+	worldtransform_.matWorld_ *= matRotX;
+
+	//x,y,z軸周りの回転角を設定
+	worldtransform_.rotation_ = { 0.0f,radian(45.0f),0.0f };
+
+	//y軸回転行列を宣言
+	Matrix4 matRotY;
+
+	matRotY.m[0][0] = cos(radian(45.0f));
+	matRotY.m[0][2] = -sin(radian(45.0f));
+	matRotY.m[1][1] = 1;
+	matRotY.m[2][0] = sin(radian(45.0f));
+	matRotY.m[2][2] = cos(radian(45.0f));
+	matRotY.m[3][3] = 1;
+
+	worldtransform_.matWorld_.m[0][0] = 1;
+	worldtransform_.matWorld_.m[1][1] = 1;
+	worldtransform_.matWorld_.m[2][2] = 1;
+	worldtransform_.matWorld_.m[3][3] = 1;
+
+	worldtransform_.matWorld_ *= matRotY;
+
 	//行列の転送
 	worldtransform_.TransferMatrix();
+
+	////x,y,z軸周りの回転角を設定
+	//worldtransform_.rotation_ = { radian(45.0f), radian(45.0f), radian(45.0f) };
+
+	////合成用回転行列を宣言
+	//Matrix4 matRot;
+
+	////各軸用回転行列を宣言
+	//Matrix4 matRotX, matRotY, matRotZ;
+
+	////回転行列の各要素を設定する
+	//matRotX.m[0][0] = 1;
+	//matRotX.m[1][1] = cos(radian(45.0f));
+	//matRotX.m[1][2] = sin(radian(45.0f));
+	//matRotX.m[2][1] = -sin(radian(45.0f));
+	//matRotX.m[2][2] = cos(radian(45.0f));
+	//matRotX.m[3][3] = 1;
+
+	//matRotY.m[0][0] = cos(radian(45.0f));
+	//matRotY.m[0][2] = -sin(radian(45.0f));
+	//matRotY.m[1][1] = 1;
+	//matRotY.m[2][0] = sin(radian(45.0f));
+	//matRotY.m[2][2] = cos(radian(45.0f));
+	//matRotY.m[3][3] = 1;
+
+	//matRotZ.m[0][0] = cos(radian(45.0f));
+	//matRotZ.m[0][1] = sin(radian(45.0f));
+	//matRotZ.m[1][0] = -sin(radian(45.0f));
+	//matRotZ.m[1][1] = cos(radian(45.0f));
+	//matRotZ.m[2][2] = 1;
+	//matRotZ.m[3][3] = 1;
+
+	////各軸の回転行列を合成
+	//matRot = matRotZ * matRotX * matRotY;
+
+	//worldtransform_.matWorld_.m[0][0] = 1;
+	//worldtransform_.matWorld_.m[1][1] = 1;
+	//worldtransform_.matWorld_.m[2][2] = 1;
+	//worldtransform_.matWorld_.m[3][3] = 1;
+
+	//worldtransform_.matWorld_ *= matRot;
+
+	////行列の転送
+	//worldtransform_.TransferMatrix();
 }
 
 void GameScene::Update() {
