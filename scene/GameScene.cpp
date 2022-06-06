@@ -28,6 +28,27 @@ void GameScene::Initialize() {
 
 	//軸方向表示の表示を有効にする
 	AxisIndicator::GetInstance()->SetVisible(true);
+
+	//x,y,z方向のスケーリングを設定
+	worldtransform_.scale_ = { 1,1,5 };
+
+	//スケーリング倍率を行列を宣言
+	Matrix4 matScale;
+
+	matScale.m[0][0] = worldtransform_.scale_.x;
+	matScale.m[1][1] = worldtransform_.scale_.y;
+	matScale.m[2][2] = worldtransform_.scale_.z;
+	matScale.m[3][3] = 1;
+
+	worldtransform_.matWorld_.m[0][0] = 1;
+	worldtransform_.matWorld_.m[1][1] = 1;
+	worldtransform_.matWorld_.m[2][2] = 1;
+	worldtransform_.matWorld_.m[3][3] = 1;
+
+	worldtransform_.matWorld_ *= matScale;
+
+	//行列の転送
+	worldtransform_.TransferMatrix();
 }
 
 void GameScene::Update() {
