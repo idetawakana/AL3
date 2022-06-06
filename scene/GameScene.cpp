@@ -30,6 +30,9 @@ void GameScene::Initialize() {
 	//軸方向表示の表示を有効にする
 	AxisIndicator::GetInstance()->SetVisible(true);
 
+	//軸方向表示が参照するビュープロジェクションを指定する(アドレス渡し)
+	AxisIndicator::GetInstance()->SetTargetViewProjection(&debugCamera_->GetViewProjection());
+
 	//x,y,z方向のスケーリングを設定
 	worldtransform_.scale_ = { 1,10,1 };
 
@@ -41,15 +44,15 @@ void GameScene::Initialize() {
 	matScale.m[2][2] = worldtransform_.scale_.z;
 	matScale.m[3][3] = 1;
 
-	//worldtransform_.matWorld_.m[0][0] = 1;
-	//worldtransform_.matWorld_.m[1][1] = 1;
-	//worldtransform_.matWorld_.m[2][2] = 1;
-	//worldtransform_.matWorld_.m[3][3] = 1;
+	worldtransform_.matWorld_.m[0][0] = 1;
+	worldtransform_.matWorld_.m[1][1] = 1;
+	worldtransform_.matWorld_.m[2][2] = 1;
+	worldtransform_.matWorld_.m[3][3] = 1;
 
-	//worldtransform_.matWorld_ *= matScale;
+	worldtransform_.matWorld_ *= matScale;
 
-	////行列の転送
-	//worldtransform_.TransferMatrix();
+	//行列の転送
+	worldtransform_.TransferMatrix();
 
 	//x,y,z軸周りの回転角を設定
 	worldtransform_.rotation_ = { 0.0f,0.0f,radian(45.0f)};
@@ -64,15 +67,15 @@ void GameScene::Initialize() {
 	matRotZ.m[2][2] = 1;
 	matRotZ.m[3][3] = 1;
 
-	//worldtransform_.matWorld_.m[0][0] = 1;
-	//worldtransform_.matWorld_.m[1][1] = 1;
-	//worldtransform_.matWorld_.m[2][2] = 1;
-	//worldtransform_.matWorld_.m[3][3] = 1;
+	worldtransform_.matWorld_.m[0][0] = 1;
+	worldtransform_.matWorld_.m[1][1] = 1;
+	worldtransform_.matWorld_.m[2][2] = 1;
+	worldtransform_.matWorld_.m[3][3] = 1;
 
-	//worldtransform_.matWorld_ *= matRotZ;
+	worldtransform_.matWorld_ *= matRotZ;
 
-	////行列の転送
-	//worldtransform_.TransferMatrix();
+	//行列の転送
+	worldtransform_.TransferMatrix();
 
 	//x,y,z軸周りの回転角を設定
 	worldtransform_.rotation_ = { radian(45.0f),0.0f,0.0f };
@@ -87,15 +90,15 @@ void GameScene::Initialize() {
 	matRotX.m[2][2] = cos(radian(45.0f));
 	matRotX.m[3][3] = 1;
 
-	//worldtransform_.matWorld_.m[0][0] = 1;
-	//worldtransform_.matWorld_.m[1][1] = 1;
-	//worldtransform_.matWorld_.m[2][2] = 1;
-	//worldtransform_.matWorld_.m[3][3] = 1;
+	worldtransform_.matWorld_.m[0][0] = 1;
+	worldtransform_.matWorld_.m[1][1] = 1;
+	worldtransform_.matWorld_.m[2][2] = 1;
+	worldtransform_.matWorld_.m[3][3] = 1;
 
-	//worldtransform_.matWorld_ *= matRotX;
+	worldtransform_.matWorld_ *= matRotX;
 
-	////行列の転送
-	//worldtransform_.TransferMatrix();
+	//行列の転送
+	worldtransform_.TransferMatrix();
 
 	//x,y,z軸周りの回転角を設定
 	worldtransform_.rotation_ = { 0.0f,radian(45.0f),0.0f };
@@ -110,15 +113,15 @@ void GameScene::Initialize() {
 	matRotY.m[2][2] = cos(radian(45.0f));
 	matRotY.m[3][3] = 1;
 
-	//worldtransform_.matWorld_.m[0][0] = 1;
-	//worldtransform_.matWorld_.m[1][1] = 1;
-	//worldtransform_.matWorld_.m[2][2] = 1;
-	//worldtransform_.matWorld_.m[3][3] = 1;
+	worldtransform_.matWorld_.m[0][0] = 1;
+	worldtransform_.matWorld_.m[1][1] = 1;
+	worldtransform_.matWorld_.m[2][2] = 1;
+	worldtransform_.matWorld_.m[3][3] = 1;
 
-	//worldtransform_.matWorld_ *= matRotY;
+	worldtransform_.matWorld_ *= matRotY;
 
-	////行列の転送
-	//worldtransform_.TransferMatrix();
+	//行列の転送
+	worldtransform_.TransferMatrix();
 
 	//x,y,z軸周りの平行移動を設定
 	worldtransform_.translation_ = { 0, 10, 0 };
@@ -130,25 +133,25 @@ void GameScene::Initialize() {
 	matTrans.m[3][1] = worldtransform_.translation_.y;
 	matTrans.m[3][2] = worldtransform_.translation_.z;
 
-	//worldtransform_.matWorld_.m[0][0] = 1;
-	//worldtransform_.matWorld_.m[1][1] = 1;
-	//worldtransform_.matWorld_.m[2][2] = 1;
-	//worldtransform_.matWorld_.m[3][3] = 1;
-
-	//worldtransform_.matWorld_ *= matTrans;
-
-	////行列の転送
-	//worldtransform_.TransferMatrix();
-
-	//行列の合成
 	worldtransform_.matWorld_.m[0][0] = 1;
 	worldtransform_.matWorld_.m[1][1] = 1;
 	worldtransform_.matWorld_.m[2][2] = 1;
 	worldtransform_.matWorld_.m[3][3] = 1;
 
-	worldtransform_.matWorld_ = matScale * matRotZ * matRotX * matRotY * matTrans;
+	worldtransform_.matWorld_ *= matTrans;
 
+	//行列の転送
 	worldtransform_.TransferMatrix();
+
+	////行列の合成
+	//worldtransform_.matWorld_.m[0][0] = 1;
+	//worldtransform_.matWorld_.m[1][1] = 1;
+	//worldtransform_.matWorld_.m[2][2] = 1;
+	//worldtransform_.matWorld_.m[3][3] = 1;
+
+	//worldtransform_.matWorld_ = matScale * matRotZ * matRotX * matRotY * matTrans;
+
+	//worldtransform_.TransferMatrix();
 
 	////x,y,z軸周りの回転角を設定
 	//worldtransform_.rotation_ = { radian(45.0f), radian(45.0f), radian(45.0f) };
