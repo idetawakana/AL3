@@ -31,7 +31,7 @@ void GameScene::Initialize() {
 	AxisIndicator::GetInstance()->SetVisible(true);
 
 	//x,y,z方向のスケーリングを設定
-	worldtransform_.scale_ = { 1,1,5 };
+	worldtransform_.scale_ = { 1,10,1 };
 
 	//スケーリング倍率を行列を宣言
 	Matrix4 matScale;
@@ -41,12 +41,15 @@ void GameScene::Initialize() {
 	matScale.m[2][2] = worldtransform_.scale_.z;
 	matScale.m[3][3] = 1;
 
-	worldtransform_.matWorld_.m[0][0] = 1;
-	worldtransform_.matWorld_.m[1][1] = 1;
-	worldtransform_.matWorld_.m[2][2] = 1;
-	worldtransform_.matWorld_.m[3][3] = 1;
+	//worldtransform_.matWorld_.m[0][0] = 1;
+	//worldtransform_.matWorld_.m[1][1] = 1;
+	//worldtransform_.matWorld_.m[2][2] = 1;
+	//worldtransform_.matWorld_.m[3][3] = 1;
 
-	worldtransform_.matWorld_ *= matScale;
+	//worldtransform_.matWorld_ *= matScale;
+
+	////行列の転送
+	//worldtransform_.TransferMatrix();
 
 	//x,y,z軸周りの回転角を設定
 	worldtransform_.rotation_ = { 0.0f,0.0f,radian(45.0f)};
@@ -61,12 +64,15 @@ void GameScene::Initialize() {
 	matRotZ.m[2][2] = 1;
 	matRotZ.m[3][3] = 1;
 
-	worldtransform_.matWorld_.m[0][0] = 1;
-	worldtransform_.matWorld_.m[1][1] = 1;
-	worldtransform_.matWorld_.m[2][2] = 1;
-	worldtransform_.matWorld_.m[3][3] = 1;
+	//worldtransform_.matWorld_.m[0][0] = 1;
+	//worldtransform_.matWorld_.m[1][1] = 1;
+	//worldtransform_.matWorld_.m[2][2] = 1;
+	//worldtransform_.matWorld_.m[3][3] = 1;
 
-	worldtransform_.matWorld_ *= matRotZ;
+	//worldtransform_.matWorld_ *= matRotZ;
+
+	////行列の転送
+	//worldtransform_.TransferMatrix();
 
 	//x,y,z軸周りの回転角を設定
 	worldtransform_.rotation_ = { radian(45.0f),0.0f,0.0f };
@@ -81,12 +87,15 @@ void GameScene::Initialize() {
 	matRotX.m[2][2] = cos(radian(45.0f));
 	matRotX.m[3][3] = 1;
 
-	worldtransform_.matWorld_.m[0][0] = 1;
-	worldtransform_.matWorld_.m[1][1] = 1;
-	worldtransform_.matWorld_.m[2][2] = 1;
-	worldtransform_.matWorld_.m[3][3] = 1;
+	//worldtransform_.matWorld_.m[0][0] = 1;
+	//worldtransform_.matWorld_.m[1][1] = 1;
+	//worldtransform_.matWorld_.m[2][2] = 1;
+	//worldtransform_.matWorld_.m[3][3] = 1;
 
-	worldtransform_.matWorld_ *= matRotX;
+	//worldtransform_.matWorld_ *= matRotX;
+
+	////行列の転送
+	//worldtransform_.TransferMatrix();
 
 	//x,y,z軸周りの回転角を設定
 	worldtransform_.rotation_ = { 0.0f,radian(45.0f),0.0f };
@@ -101,14 +110,44 @@ void GameScene::Initialize() {
 	matRotY.m[2][2] = cos(radian(45.0f));
 	matRotY.m[3][3] = 1;
 
+	//worldtransform_.matWorld_.m[0][0] = 1;
+	//worldtransform_.matWorld_.m[1][1] = 1;
+	//worldtransform_.matWorld_.m[2][2] = 1;
+	//worldtransform_.matWorld_.m[3][3] = 1;
+
+	//worldtransform_.matWorld_ *= matRotY;
+
+	////行列の転送
+	//worldtransform_.TransferMatrix();
+
+	//x,y,z軸周りの平行移動を設定
+	worldtransform_.translation_ = { 0, 10, 0 };
+
+	//平行移動行列を宣言
+	Matrix4 matTrans = MathUtility::Matrix4Identity();
+
+	matTrans.m[3][0] = worldtransform_.translation_.x;
+	matTrans.m[3][1] = worldtransform_.translation_.y;
+	matTrans.m[3][2] = worldtransform_.translation_.z;
+
+	//worldtransform_.matWorld_.m[0][0] = 1;
+	//worldtransform_.matWorld_.m[1][1] = 1;
+	//worldtransform_.matWorld_.m[2][2] = 1;
+	//worldtransform_.matWorld_.m[3][3] = 1;
+
+	//worldtransform_.matWorld_ *= matTrans;
+
+	////行列の転送
+	//worldtransform_.TransferMatrix();
+
+	//行列の合成
 	worldtransform_.matWorld_.m[0][0] = 1;
 	worldtransform_.matWorld_.m[1][1] = 1;
 	worldtransform_.matWorld_.m[2][2] = 1;
 	worldtransform_.matWorld_.m[3][3] = 1;
 
-	worldtransform_.matWorld_ *= matRotY;
+	worldtransform_.matWorld_ = matScale * matRotZ * matRotX * matRotY * matTrans;
 
-	//行列の転送
 	worldtransform_.TransferMatrix();
 
 	////x,y,z軸周りの回転角を設定
