@@ -2,6 +2,7 @@
 #include "TextureManager.h"
 #include <cassert>
 #include "AxisIndicator.h"
+#include <random>
 
 GameScene::GameScene() {}
 
@@ -21,7 +22,32 @@ void GameScene::Initialize() {
 
 	model_ = Model::Create();
 
-	worldtransform_.Initialize();
+	//乱数シード生成器
+	std::random_device seed_gen;
+
+	//メルセンヌ・ツイスターの乱数エンジン
+	std::mt19937_64 angleEngine(seed_gen());
+
+	std::mt19937_64 transEngine(seed_gen());
+
+	//乱数範囲の指定
+	std::uniform_real_distribution<float> angle(0,360);
+
+	std::uniform_real_distribution<float> trans(-10,10);
+
+	//配列で全てのワールドトランスフォームを順に処理する
+	for (WorldTransform& worldtransform : worldtransforms_) {
+		//ワールドトランスフォームの初期化
+		worldtransform.Initialize();
+
+		worldtransform.scale_ = { 0,0,0 };
+
+		worldtransform.scale_ = { angle(angleEngine),angle(angleEngine),angle(angleEngine)};
+
+		worldtransform.translation_ = { trans(transEngine),trans(transEngine),trans(transEngine) };
+
+
+	}
 	viewProjection_.Initialize();
 
 	debugCamera_ = new DebugCamera(1280, 720);
@@ -31,6 +57,7 @@ void GameScene::Initialize() {
 
 	//軸方向表示が参照するビュープロジェクションを指定する(アドレス渡し)
 	AxisIndicator::GetInstance()->SetTargetViewProjection(&debugCamera_->GetViewProjection());
+
 }
 
 void GameScene::Update() {
