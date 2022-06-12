@@ -4,7 +4,9 @@
 #include "AxisIndicator.h"
 #include "Utility.h"
 
-WorldTransform Determinant(Vector3 scale, Vector3 rotation, Vector3 translation);
+//WorldTransform Determinant(Vector3 scale, Vector3 rotation, Vector3 translation);
+
+void Determinant(WorldTransform worldtransform_, Vector3 scale, Vector3 rotation, Vector3 translation);
 
 Matrix4 scale(Vector3 scale);
 
@@ -48,17 +50,19 @@ void GameScene::Initialize() {
 
 	//worldtransform_ = Determinant({ 5,5,5 }, { 45,45,0 }, { 10,10,10 });
 
-	Matrix4 matScale = scale({ 5,5,5 });
-	
-	Matrix4 matRotX = rotationX(45);
-	Matrix4 matRotY = rotationY(45);
-	Matrix4 matRotZ = rotationZ(0);
+	//Matrix4 matScale = scale({ 5,5,5 });
+	//
+	//Matrix4 matRotX = rotationX(45);
+	//Matrix4 matRotY = rotationY(45);
+	//Matrix4 matRotZ = rotationZ(0);
 
-	Matrix4 matTrans = translation({ 10,10,10 });
+	//Matrix4 matTrans = translation({ 10,10,10 });
 
-	worldtransform_ = world(matScale, matRotX, matRotY, matRotZ, matTrans);
+	//worldtransform_ = world(matScale, matRotX, matRotY, matRotZ, matTrans);
 
-	worldtransform_.TransferMatrix();
+	//worldtransform_.TransferMatrix();
+
+	Determinant(worldtransform_, { 5,5,5 }, { 45,45,0 }, { 10,10,10 });
 }
 
 void GameScene::Update() {
@@ -116,10 +120,78 @@ void GameScene::Draw() {
 #pragma endregion
 }
 
-WorldTransform Determinant(Vector3 scale, Vector3 rotation, Vector3 translation) {
-	//x,y,z方向のスケーリングを設定
-	WorldTransform worldtransform_;
+//WorldTransform Determinant(Vector3 scale, Vector3 rotation, Vector3 translation) {
+//	//x,y,z方向のスケーリングを設定
+//	WorldTransform worldtransform_;
+//
+//	worldtransform_.scale_ = scale;
+//
+//	//スケーリング倍率を行列を宣言
+//	Matrix4 matScale;
+//
+//	matScale.m[0][0] = worldtransform_.scale_.x;
+//	matScale.m[1][1] = worldtransform_.scale_.y;
+//	matScale.m[2][2] = worldtransform_.scale_.z;
+//	matScale.m[3][3] = 1;
+//
+//	//x,y,z軸周りの平行移動を設定
+//	worldtransform_.translation_ = translation;
+//
+//	//平行移動行列を宣言
+//	Matrix4 matTrans = MathUtility::Matrix4Identity();
+//
+//	matTrans.m[3][0] = worldtransform_.translation_.x;
+//	matTrans.m[3][1] = worldtransform_.translation_.y;
+//	matTrans.m[3][2] = worldtransform_.translation_.z;
+//
+//	////x,y,z軸周りの回転角を設定
+//	worldtransform_.rotation_ = rotation;
+//
+//	////合成用回転行列を宣言
+//	Matrix4 matRot;
+//
+//	////各軸用回転行列を宣言
+//	Matrix4 matRotX, matRotY, matRotZ;
+//
+//	//回転行列の各要素を設定する
+//	matRotX.m[0][0] = 1;
+//	matRotX.m[1][1] = cos(radian(worldtransform_.rotation_.x));
+//	matRotX.m[1][2] = sin(radian(worldtransform_.rotation_.x));
+//	matRotX.m[2][1] = -sin(radian(worldtransform_.rotation_.x));
+//	matRotX.m[2][2] = cos(radian(worldtransform_.rotation_.x));
+//	matRotX.m[3][3] = 1;
+//
+//	matRotY.m[0][0] = cos(radian(worldtransform_.rotation_.y));
+//	matRotY.m[0][2] = -sin(radian(worldtransform_.rotation_.y));
+//	matRotY.m[1][1] = 1;
+//	matRotY.m[2][0] = sin(radian(worldtransform_.rotation_.y));
+//	matRotY.m[2][2] = cos(radian(worldtransform_.rotation_.y));
+//	matRotY.m[3][3] = 1;
+//
+//	matRotZ.m[0][0] = cos(radian(worldtransform_.rotation_.z));
+//	matRotZ.m[0][1] = sin(radian(worldtransform_.rotation_.z));
+//	matRotZ.m[1][0] = -sin(radian(worldtransform_.rotation_.z));
+//	matRotZ.m[1][1] = cos(radian(worldtransform_.rotation_.z));
+//	matRotZ.m[2][2] = 1;
+//	matRotZ.m[3][3] = 1;
+//
+//	//各軸の回転行列を合成
+//	Matrix4 mat = matRotZ.operator*=(matRotX);
+//	matRot = matRotZ.operator*=(matRotY);
+//
+//	//行列の合成
+//	worldtransform_.matWorld_.m[0][0] = 1;
+//	worldtransform_.matWorld_.m[1][1] = 1;
+//	worldtransform_.matWorld_.m[2][2] = 1;
+//	worldtransform_.matWorld_.m[3][3] = 1;
+//
+//	worldtransform_.matWorld_ = matScale.operator*=(matRot).operator*=(matTrans);
+//
+//	return worldtransform_;
+//}
 
+void Determinant(WorldTransform worldtransform_, Vector3 scale, Vector3 rotation, Vector3 translation) {
+	//x,y,z方向のスケーリングを設定
 	worldtransform_.scale_ = scale;
 
 	//スケーリング倍率を行列を宣言
@@ -183,7 +255,7 @@ WorldTransform Determinant(Vector3 scale, Vector3 rotation, Vector3 translation)
 
 	worldtransform_.matWorld_ = matScale.operator*=(matRot).operator*=(matTrans);
 
-	return worldtransform_;
+	worldtransform_.TransferMatrix();
 }
 
 Matrix4 scale(Vector3 scale) {
