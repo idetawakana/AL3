@@ -58,6 +58,20 @@ private: // メンバ変数
 
 	DebugCamera* debugCamera_ = nullptr;
 
+	int32_t speed = 1;
+
+	float sx = 1.0f;
+	float sy = 1.0f;
+	float sz = 1.0f;
+
+	float rx = 0.0f;
+	float ry = 0.0f;
+	float rz = 0.0f;
+
+	float tx = 0.0f;
+	float ty = 0.0f;
+	float tz = 0.0f;
+
 	/// <summary>
 	/// ゲームシーン用
 	/// </summary>
