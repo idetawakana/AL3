@@ -72,6 +72,10 @@ private: // メンバ変数
 	float ty = 0.0f;
 	float tz = 0.0f;
 
+	Vector3 translation = { 0,0,0 };
+
+	int32_t mode = 2;
+
 	/// <summary>
 	/// ゲームシーン用
 	/// </summary>
