@@ -54,6 +54,8 @@ private: // メンバ変数
 
 	WorldTransform worldtransforms_[100];
 
+	WorldTransform worldtransform_;
+
 	ViewProjection viewProjection_;
 
 	DebugCamera* debugCamera_ = nullptr;
