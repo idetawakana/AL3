@@ -66,7 +66,7 @@ void GameScene::Update() {
 			ry -= 1;
 		}
 
-		Determinant(worldtransform_, { sx, sy, sz }, { radian(rx), radian(ry), radian(rz) }, { tx, ty, tz });
+		Determinant(worldtransform_, { sx, sy, sz }, { rx, ry, rz }, { tx, ty, tz });
 	}
 
 	if (mode == 2) {
@@ -96,6 +96,7 @@ void GameScene::Update() {
 
 		if (input_->PushKey(DIK_W)) {
 			translation = { translation.x + speed * y.x,translation.y + speed * y.y ,translation.z + speed * y.z };
+
 		}
 		else if (input_->PushKey(DIK_S)) {
 			translation = { translation.x - speed * y.x,translation.y - speed * y.y ,translation.z - speed * y.z };
@@ -108,7 +109,7 @@ void GameScene::Update() {
 			translation = { translation.x - speed * x.x,translation.y - speed * x.y ,translation.z - speed * x.z };
 		}
 
-		Determinant(worldtransform_, { 1,1,1 }, { 0,0,0 }, translation);
+		Determinant(worldtransform_, { 1,1,1 }, { rx,ry,rz }, translation);
 	}
 
 	if (input_->TriggerKey(DIK_Q)) {
