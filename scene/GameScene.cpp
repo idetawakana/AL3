@@ -5,7 +5,7 @@
 #include <random>
 #include "Utility.h"
 
-void Determinant(WorldTransform& worldtransform_,Vector3 scale, Vector3 rotation, Vector3 translation);
+void Determinant(WorldTransform worldtransform_,Vector3 scale, Vector3 rotation, Vector3 translation);
 
 Matrix4 scale(Vector3 scale);
 
@@ -44,26 +44,26 @@ void GameScene::Initialize() {
 	std::mt19937_64 Engine(seed_gen());
 
 	//配列で全てのワールドトランスフォームを順に処理する
-	//for (WorldTransform& worldtransform : worldtransforms_) {
-	//	//ワールドトランスフォームの初期化
-	//	worldtransform.Initialize();
+	for (WorldTransform& worldtransform : worldtransforms_) {
+		//ワールドトランスフォームの初期化
+		worldtransform.Initialize();
 
-	//		//乱数範囲の指定
-	//	std::uniform_real_distribution<float> angleX(0, 360);
-	//	std::uniform_real_distribution<float> angleY(0, 360);
-	//	std::uniform_real_distribution<float> angleZ(0, 360);
+			//乱数範囲の指定
+		std::uniform_real_distribution<float> angleX(0, 360);
+		std::uniform_real_distribution<float> angleY(0, 360);
+		std::uniform_real_distribution<float> angleZ(0, 360);
 
-	//	std::uniform_real_distribution<float> transX(-10, 10);
-	//	std::uniform_real_distribution<float> transY(-10, 10);
-	//	std::uniform_real_distribution<float> transZ(-10, 10);
+		std::uniform_real_distribution<float> transX(-10, 10);
+		std::uniform_real_distribution<float> transY(-10, 10);
+		std::uniform_real_distribution<float> transZ(-10, 10);
 
-	//	Vector3 rota = { angleX(Engine),angleY(Engine) ,angleZ(Engine) };
+		Vector3 rota = { angleX(Engine),angleY(Engine) ,angleZ(Engine) };
 
-	//	Vector3 translate = { transX(Engine),transY(Engine),transZ(Engine) };
+		Vector3 translate = { transX(Engine),transY(Engine),transZ(Engine) };
 
-	//	Determinant(worldtransform, { 0,0,0 }, rota, translate);
-	//}
-	//viewProjection_.Initialize();
+		Determinant(worldtransform, { 1,1,1 }, rota, translate);
+	}
+	viewProjection_.Initialize();
 
 
 
@@ -134,7 +134,7 @@ void GameScene::Draw() {
 #pragma endregion
 }
 
-void Determinant(WorldTransform& worldtransform_,Vector3 scale, Vector3 rotation, Vector3 translation) {
+void Determinant(WorldTransform worldtransform_,Vector3 scale, Vector3 rotation, Vector3 translation) {
 	//x,y,z方向のスケーリングを設定
 	worldtransform_.scale_ = scale;
 
