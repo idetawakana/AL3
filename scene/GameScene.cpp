@@ -27,6 +27,7 @@ void GameScene::Initialize() {
 	model_ = Model::Create();
 
 	worldtransform_.Initialize();
+	worldtransform1_.Initialize();
 	viewProjection_.Initialize();
 
 	debugCamera_ = new DebugCamera(1280, 720);
@@ -109,7 +110,7 @@ void GameScene::Update() {
 			translation = { translation.x - speed * x.x,translation.y - speed * x.y ,translation.z - speed * x.z };
 		}
 
-		Determinant(worldtransform_, { 1,1,1 }, { rx,ry,rz }, translation);
+		Determinant(worldtransform_, { 1,1,1 }, { 0,0,0 }, translation);
 	}
 
 	if (input_->TriggerKey(DIK_Q)) {
@@ -149,6 +150,7 @@ void GameScene::Update() {
 		/// </summary>
 		/// 3Dモデル描画
 		model_->Draw(worldtransform_, debugCamera_->GetViewProjection(), textureHandle_);
+		model_->Draw(worldtransform1_, debugCamera_->GetViewProjection(), textureHandle_);
 
 		// 3Dオブジェクト描画後処理
 		Model::PostDraw();

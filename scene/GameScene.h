@@ -53,6 +53,7 @@ private: // メンバ変数
 	Model* model_ = nullptr;
 
 	WorldTransform worldtransform_;
+	WorldTransform worldtransform1_;
 
 	ViewProjection viewProjection_;
 
