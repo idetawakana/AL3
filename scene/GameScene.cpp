@@ -38,6 +38,10 @@ void GameScene::Initialize() {
 	model_ = Model::Create();
 
 	worldtransform_.Initialize();
+	trans = { 0,0,0 };
+	rota = { 0,0,0 };
+	scale = { 1,1,1 };
+
 	viewProjection_.Initialize();
 
 	debugCamera_ = new DebugCamera(1280, 720);
@@ -62,11 +66,15 @@ void GameScene::Initialize() {
 
 	//worldtransform_.TransferMatrix();
 
-	Determinant(worldtransform_, { 5,5,5 }, { 45,45,0 }, { 10,10,10 });
+	//Determinant(worldtransform_, { 5,5,5 }, { 45,45,0 }, { 10,10,10 });
 }
 
 void GameScene::Update() {
 	debugCamera_->Update();
+
+	if()
+
+	Determinant(worldtransform_, scale, rota, trans);
 }
 
 void GameScene::Draw() {
