@@ -72,7 +72,61 @@ void GameScene::Initialize() {
 void GameScene::Update() {
 	debugCamera_->Update();
 
-	if()
+	if (input_->PushKey(DIK_W)) {
+		rota = { rota.x + 1,rota.y,rota.z };
+	}
+
+	if (input_->PushKey(DIK_S)) {
+		rota = { rota.x - 1,rota.y,rota.z };
+	}
+
+	if (input_->PushKey(DIK_D)) {
+		rota = { rota.x,rota.y - 1,rota.z };
+	}
+
+	if (input_->PushKey(DIK_A)) {
+		rota = { rota.x,rota.y + 1,rota.z };
+	}
+
+	if (input_->PushKey(DIK_UP)) {
+		trans = { trans.x,trans.y + 0.5f,trans.z };
+	}
+
+	if (input_->PushKey(DIK_DOWN)) {
+		trans = { trans.x,trans.y - 0.5f,trans.z };
+	}
+
+	if (input_->PushKey(DIK_RIGHT)) {
+		trans = { trans.x + 0.5f,trans.y,trans.z };
+	}
+
+	if (input_->PushKey(DIK_LEFT)) {
+		trans = { trans.x - 0.5f,trans.y,trans.z };
+	}
+
+	if (input_->PushKey(DIK_Z)) {
+		scale = { scale.x + 0.5f,scale.y,scale.z };
+	}
+
+	if (input_->PushKey(DIK_X)) {
+		scale = { scale.x - 0.5f,scale.y,scale.z };
+	}
+
+	if (input_->PushKey(DIK_C)) {
+		scale = { scale.x,scale.y + 0.5f,scale.z };
+	}
+
+	if (input_->PushKey(DIK_V)) {
+		scale = { scale.x,scale.y - 0.5f,scale.z };
+	}
+
+	if (input_->PushKey(DIK_B)) {
+		scale = { scale.x,scale.y,scale.z + 0.5f };
+	}
+
+	if (input_->PushKey(DIK_N)) {
+		scale = { scale.x,scale.y,scale.z - 0.5f };
+	}
 
 	Determinant(worldtransform_, scale, rota, trans);
 }
