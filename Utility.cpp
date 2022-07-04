@@ -5,3 +5,7 @@ float radian(float a) {
 float pi() {
 	return 3.141592;
 }
+
+float angle(float a) {
+	return (180 / 3.141592 * a);
+}
