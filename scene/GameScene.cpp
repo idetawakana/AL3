@@ -88,7 +88,9 @@ void GameScene::Update() {
 
 	//子の更新
 	{
-		Determinant(worldTransforms_[1],{1,1,1}, {0,0,0}, worldTransforms_[1].translation_);
+		//Determinant_(worldTransforms_[1],{1,1,1}, {0,0,0}, worldTransforms_[1].translation_);
+
+		translation(worldTransforms_[1], worldTransforms_[1].translation_);
 
 		worldTransforms_[1].matWorld_.operator*=(worldTransforms_[0].matWorld_);
 
