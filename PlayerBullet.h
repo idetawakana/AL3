@@ -1,23 +1,18 @@
 #pragma once
-
 #include "Model.h"
 #include "WorldTransform.h"
-#include "Input.h"
-#include "DebugText.h"
-#include "PlayerBullet.h"
-
 
 ///<summary>
-///自キャラ
+///自キャラの弾
 ///</summary>
-class Player {
+class PlayerBullet {
 public:
 	///<summary>
 	///初期化
 	///</summary>
 	///<param name = "model">モデル</param>
-	///<param name = "textureHandle">テクスチャハンドル</param>
-	void Initialize(Model* model, uint32_t textureHandle);
+	///<param name = "position">初期座標</param>
+	void Initialize(Model* model, const Vector3& position);
 
 	///<summary>
 	///更新
@@ -25,23 +20,12 @@ public:
 	void Update();
 
 	///<summary>
-	///描画
+	///初期化
 	///</summary>
-	///<param name = "viewProjection">ビュープロジェクション(参照渡し)</param>
-	void Draw(ViewProjection viewProjection_);
-
-	//弾
-	PlayerBullet* bullet_ = nullptr;
-
-	/// <summary>
-	/// 攻撃
-	/// </summary>
-	void Attack();
+	///<param name = "viewProjection">ビュープロジェクション</param>
+	void Draw(const ViewProjection& viewProjection);
 
 private:
-	Input* input_ = nullptr;
-	DebugText* debugText_ = nullptr;
-
 	//ワールド変換データ
 	WorldTransform worldTransform_;
 
