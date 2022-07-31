@@ -59,6 +59,8 @@ private: // メンバ変数
 	float viewAngle = 0.0f;
 
 	DebugCamera* debugCamera_ = nullptr;
+	//デバッグカメラ有効
+	bool isDebugCameraActive_ = false;
 
 	//自キャラ
 	Player* player_ = nullptr;

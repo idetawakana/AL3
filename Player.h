@@ -2,6 +2,9 @@
 
 #include "Model.h"
 #include "WorldTransform.h"
+#include "Input.h"
+#include "DebugText.h"
+
 
 ///<summary>
 ///自キャラ
@@ -23,7 +26,8 @@ public:
 	///<summary>
 	///描画
 	///</summary>
-	void Draw();
+	///<param name = "viewProjection">ビュープロジェクション(参照渡し)</param>
+	void Draw(ViewProjection viewProjection_);
 
 private:
 	Input* input_ = nullptr;
