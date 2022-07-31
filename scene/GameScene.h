@@ -10,6 +10,7 @@
 #include "ViewProjection.h"
 #include "WorldTransform.h"
 #include "DebugCamera.h"
+#include "Player.h"
 
 /// <summary>
 /// ゲームシーン
@@ -52,16 +53,15 @@ private: // メンバ変数
 
 	Model* model_ = nullptr;
 
-	WorldTransform worldtransforms_[100];
-
-	WorldTransform worldtransform_;
-
 	ViewProjection viewProjection_;
 
 	//カメラ上方向の角度
 	float viewAngle = 0.0f;
 
 	DebugCamera* debugCamera_ = nullptr;
+
+	//自キャラ
+	Player* player_ = nullptr;
 
 	/// <summary>
 	/// ゲームシーン用
