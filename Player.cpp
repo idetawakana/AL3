@@ -26,6 +26,7 @@ void Player::Initialize(Model* model, uint32_t textureHandle){
 
 void Player::Update(){
 
+	move = { 0,0,0 };
 	//移動
 	if (input_->PushKey(DIK_RIGHT)) {
 		move.x += 0.5f;
@@ -86,7 +87,7 @@ void Player::Update(){
 		rotate.z += 0.5f;
 	}
 
-	Determinant(worldTransform_, scale, rotate, move);
+	Determinant(worldTransform_, scale, rotate, worldTransform_.translation_);
 
 	//キャラクター攻撃処理
 	Attack();

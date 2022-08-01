@@ -19,7 +19,7 @@ void PlayerBullet::Initialize(Model* model, const Vector3& position) {
 }
 
 void PlayerBullet::Update(){
-	Determinant(worldTransform_, scale, rotate, move);
+	Determinant(worldTransform_, scale, rotate, worldTransform_.translation_);
 }
 
 void PlayerBullet::Draw(const ViewProjection& viewProjection){
