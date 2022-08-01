@@ -5,6 +5,8 @@
 #include "Input.h"
 #include "DebugText.h"
 #include "PlayerBullet.h"
+#include <memory>
+#include <list>
 
 
 ///<summary>
@@ -31,7 +33,7 @@ public:
 	void Draw(ViewProjection viewProjection_);
 
 	//íe
-	PlayerBullet* bullet_ = nullptr;
+	std::list<std::unique_ptr<PlayerBullet>> bullets_;
 
 	/// <summary>
 	/// çUåÇ

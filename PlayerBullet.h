@@ -12,7 +12,8 @@ public:
 	///</summary>
 	///<param name = "model">モデル</param>
 	///<param name = "position">初期座標</param>
-	void Initialize(Model* model, const Vector3& position);
+	///<param name = "velocity">速度</param>
+	void Initialize(Model* model, const Vector3& position,const Vector3& velocity);
 
 	///<summary>
 	///更新
@@ -32,6 +33,9 @@ private:
 	Vector3 move = { 0,0,0 };
 	Vector3 rotate = { 0,0,0 };
 	Vector3 scale = { 1,1,1 };
+
+	//速度
+	Vector3 velocity_;
 
 	//モデル
 	Model* model_ = nullptr;

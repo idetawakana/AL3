@@ -12,3 +12,5 @@ void Determinant(WorldTransform worldtransform_, Vector3 scale, Vector3 rotation
 void translation_(WorldTransform worldTransform, Vector3 trans);
 
 void Rotation(WorldTransform worldtransform_, Vector3 rotation);
+
+Vector3 operator*(const Vector3& v, Matrix4& m);

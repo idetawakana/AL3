@@ -2,11 +2,14 @@
 #include <cassert>
 #include "Utility.h"
 
-void PlayerBullet::Initialize(Model* model, const Vector3& position) {
+void PlayerBullet::Initialize(Model* model, const Vector3& position, const Vector3& velocity) {
 	//NULLポインタチェック
 	assert(model);
 
 	model_ = model;
+
+	//引数で受け取った速度をメンバ変数に代入
+	velocity_ = velocity;
 
 	//テクスチャ読み込み
 	textureHandle_ = TextureManager::Load("black.png");
@@ -18,7 +21,10 @@ void PlayerBullet::Initialize(Model* model, const Vector3& position) {
 	worldTransform_.translation_ = position;
 }
 
-void PlayerBullet::Update(){
+void PlayerBullet::Update(){	
+	//座標を移動させる(1フレーム分の移動量を足しこむ)
+	worldTransform_.translation_ += velocity_;
+
 	Determinant(worldTransform_, scale, rotate, worldTransform_.translation_);
 }
 
